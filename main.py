@@ -20,7 +20,7 @@ if os.name == 'posix':
         subprocess.run(['unoconv', '-f', 'pdf', '-o', pdf_path, docx_path])
 
 def get_image_data(url):
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     response.raise_for_status()
     return response.content
 
