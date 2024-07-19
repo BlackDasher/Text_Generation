@@ -1,15 +1,11 @@
 import streamlit as st
 import os
-import requests
 from docx import Document
 from docx.shared import Inches
-from io import BytesIO
 import docx2pdf
-from PIL import Image
 from transformers import AutoModelForCausalLM, GenerationConfig
-
-import torch
 import random
+from security import safe_requests
 
 if os.name == 'nt':
     import pythoncom
@@ -20,7 +16,7 @@ if os.name == 'posix':
         subprocess.run(['unoconv', '-f', 'pdf', '-o', pdf_path, docx_path])
 
 def get_image_data(url):
-    response = requests.get(url, timeout=60)
+    response = safe_requests.get(url, timeout=60)
     response.raise_for_status()
     return response.content
 
