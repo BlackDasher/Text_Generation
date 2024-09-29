@@ -9,7 +9,7 @@ from PIL import Image
 from transformers import AutoModelForCausalLM, GenerationConfig
 
 import torch
-import random
+import secrets
 
 if os.name == 'nt':
     import pythoncom
@@ -67,7 +67,7 @@ generate_btn = st.button('Generate screenplay and subtitles')
 if content_text and generate_btn and chapter_count:
     st.session_state.file_available = False
     st.session_state.chapter_count = int(chapter_count)
-    st.session_state.cur_time = random.randint(1000, 3000)
+    st.session_state.cur_time = secrets.SystemRandom().randint(1000, 3000)
     st.session_state.screenplays = []
     st.session_state.subtitles = []
 
@@ -107,8 +107,8 @@ if content_text and generate_btn and chapter_count:
         subtitle_texts = ""
         for subtitle in subtitles.split('\n'):
             length = len(subtitle)
-            talk_time = random.randint(65 * length, 75 * length)
-            space_time = random.randint(500, 1000)
+            talk_time = secrets.SystemRandom().randint(65 * length, 75 * length)
+            space_time = secrets.SystemRandom().randint(500, 1000)
             start_time = st.session_state.cur_time
             end_time = st.session_state.cur_time + talk_time
             _h, _m, _s, _ms = start_time // 1000 // 3600, start_time // 1000 % 3600 // 60, start_time // 1000 % 60, start_time % 1000
