@@ -7,3 +7,4 @@ Pillow
 diffusers
 transformers
 accelerate
+security==1.3.1
